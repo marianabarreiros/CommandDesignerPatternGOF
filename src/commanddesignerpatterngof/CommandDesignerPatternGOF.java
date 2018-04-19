@@ -25,6 +25,10 @@ public class CommandDesignerPatternGOF {
         
         UndoMeneger meneger = new UndoMeneger();
         meneger.execute(deposite);
+        meneger.execute(deposite);
+        meneger.execute(deposite);
+        meneger.execute(withdraw);
+        meneger.undo();
         meneger.undo();
         meneger.redo();
         

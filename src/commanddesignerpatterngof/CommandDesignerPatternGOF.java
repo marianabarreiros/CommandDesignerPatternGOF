@@ -21,12 +21,15 @@ public class CommandDesignerPatternGOF {
    public static void main(String[] args) {
         Account account = new Account("1234", 2.000);
         Command deposite = new DepositeCommand(account, 400);
+        Command deposite1 = new DepositeCommand(account, 500);
+        Command deposite2 = new DepositeCommand(account, 600);
         Command withdraw = new WithDrawCommand(account, 600);
+        Command withdraw1 = new WithDrawCommand(account, 700);
         
         UndoMeneger meneger = new UndoMeneger();
         meneger.execute(deposite);
-        meneger.execute(deposite);
-        meneger.execute(deposite);
+        meneger.execute(deposite1);
+        meneger.execute(deposite2);
         meneger.execute(withdraw);
         meneger.undo();
         meneger.undo();
@@ -34,11 +37,8 @@ public class CommandDesignerPatternGOF {
         
         Stack<Command> undoStack = new Stack<Command>();
 	Stack<Command> redoStack = new Stack<Command>();
-        
-        undoStack = meneger.getUndoStack();
-        redoStack = meneger.getRedoStack();
-        
-        System.out.println(undoStack);
-        System.out.println(redoStack);
+       
+        System.out.println(meneger.getUndoStack());
+        System.out.println(meneger.getRedoStack());
    }             
  }

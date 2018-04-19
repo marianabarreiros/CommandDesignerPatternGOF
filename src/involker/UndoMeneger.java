@@ -16,6 +16,14 @@ public class UndoMeneger {
 
 	private Stack<Command> undoStack = new Stack<Command>();
 	private Stack<Command> redoStack = new Stack<Command>();
+
+    public Stack<Command> getUndoStack() {
+        return undoStack;
+    }
+
+    public Stack<Command> getRedoStack() {
+        return redoStack;
+    }
 	
 	public void execute(Command command) {
 		try {
@@ -27,7 +35,6 @@ public class UndoMeneger {
 			}
 			redoStack.clear();
 		} catch (IllegalStateException e) {
-			// report and log
 		}
 	}
 
@@ -38,7 +45,6 @@ public class UndoMeneger {
 				command.undo();
 				redoStack.push(command);
 			} catch (IllegalStateException e) {
-				// report and log
 			}
 		}
 	}

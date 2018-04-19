@@ -14,8 +14,8 @@ import java.util.Stack;
  */
 public class UndoMeneger {
 
-	private Stack<Command> undoStack = new Stack<Command>();
-	private Stack<Command> redoStack = new Stack<Command>();
+    private Stack<Command> undoStack = new Stack<Command>();
+    private Stack<Command> redoStack = new Stack<Command>();
 
     public Stack<Command> getUndoStack() {
         return undoStack;
@@ -24,47 +24,50 @@ public class UndoMeneger {
     public Stack<Command> getRedoStack() {
         return redoStack;
     }
-	
-	public void execute(Command command) {
-		try {
-			command.execute();
-			if (isUndoAvailable() && undoStack.peek().isCollapsible(command)) {
-				undoStack.peek().collapse(command);
-			} else {
-				undoStack.push(command);
-			}
-			redoStack.clear();
-		} catch (IllegalStateException e) {
-		}
-	}
 
-	public void undo() {
-		if (!undoStack.isEmpty()) {
-			try {
-				Command command = undoStack.pop();
-				command.undo();
-				redoStack.push(command);
-			} catch (IllegalStateException e) {
-			}
-		}
-	}
-	
-	public void redo() {
-		if (!redoStack.isEmpty()) {
-			try {
-				Command command = redoStack.pop();
-				command.redo();
-				undoStack.push(command);
-			} catch (IllegalStateException e) {
-				// report and log
-			}
-		}
+    public void execute(Command command) {
+//        try {
+//            command.execute();
+//            if (isUndoAvailable() && undoStack.peek().isCollapsible(command)) {
+//                undoStack.peek().collapse(command);
+//            } else {
+//                undoStack.push(command);
+//            }
+//            redoStack.clear();
+//        } catch (IllegalStateException e) {
+//        }
+        command.execute();
+        undoStack.push(command);
+        redoStack.clear();
+    }
+
+    public void undo() {
+        if (!undoStack.isEmpty()) {
+            try {
+                Command command = undoStack.pop();
+                command.undo();
+                redoStack.push(command);
+            } catch (IllegalStateException e) {
+            }
         }
-        
-	public boolean isUndoAvailable() {
-		return !undoStack.isEmpty();
-	}
-	public boolean isRedoAvailable() {
-		return !redoStack.isEmpty();
-	}
+    }
+
+    public void redo() {
+        if (!redoStack.isEmpty()) {
+            try {
+                Command command = redoStack.pop();
+                command.redo();
+                undoStack.push(command);
+            } catch (IllegalStateException e) {
+            }
+        }
+    }
+
+    public boolean isUndoAvailable() {
+        return !undoStack.isEmpty();
+    }
+
+    public boolean isRedoAvailable() {
+        return !redoStack.isEmpty();
+    }
 }

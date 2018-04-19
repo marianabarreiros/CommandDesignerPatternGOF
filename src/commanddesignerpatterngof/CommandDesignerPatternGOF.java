@@ -19,21 +19,21 @@ import receiver.Account;
 public class CommandDesignerPatternGOF {
 
    public static void main(String[] args) {
-        Account account = new Account("1234", 2.000);
+        Account account = new Account("1234", 2000);
         Command deposite = new DepositeCommand(account, 400);
         Command deposite1 = new DepositeCommand(account, 500);
-        Command deposite2 = new DepositeCommand(account, 600);
-        Command withdraw = new WithDrawCommand(account, 600);
-        Command withdraw1 = new WithDrawCommand(account, 700);
+//        Command deposite2 = new DepositeCommand(account, 600);
+//        Command withdraw = new WithDrawCommand(account, 600);
+//        Command withdraw1 = new WithDrawCommand(account, 700);
         
         UndoMeneger meneger = new UndoMeneger();
         meneger.execute(deposite);
         meneger.execute(deposite1);
-        meneger.execute(deposite2);
-        meneger.execute(withdraw);
+//        meneger.execute(deposite2);
+//        meneger.execute(withdraw);
         meneger.undo();
-        meneger.undo();
-        meneger.redo();
+//        meneger.undo();
+//        meneger.redo();
         
         Stack<Command> undoStack = new Stack<Command>();
 	Stack<Command> redoStack = new Stack<Command>();

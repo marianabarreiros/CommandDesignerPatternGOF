@@ -35,15 +35,5 @@ public class DepositeCommand implements Command{
     public void redo() {
         execute();
     }
-
-    @Override
-    public boolean isCollapsible(Command command) {
-        return command.getClass() == DepositeCommand.class;
-    }
-
-    @Override
-    public void collapse(Command command) {
-        amount += ((DepositeCommand)command).amount;
-    }
     
 }

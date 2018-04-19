@@ -35,16 +35,4 @@ public class WithDrawCommand implements Command{
     public void redo() {
         execute();
     }
-
-    @Override
-    public boolean isCollapsible(Command command) {
-        return command.getClass() == WithDrawCommand.class;
-    }
-
-    @Override
-    public void collapse(Command command) {
-        amount += ((WithDrawCommand)command).amount;
-    }
-    
-    
 }

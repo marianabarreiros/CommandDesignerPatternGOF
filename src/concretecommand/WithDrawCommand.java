@@ -12,11 +12,11 @@ import receiver.Account;
  *
  * @author Win-7
  */
-public class WithDraw implements Command{
+public class WithDrawCommand implements Command{
     private Account account;
     private double amount;
 
-    public WithDraw(Account account, double amount) {
+    public WithDrawCommand(Account account, double amount) {
         this.account = account;
         this.amount = amount;
     }
@@ -34,6 +34,16 @@ public class WithDraw implements Command{
     @Override
     public void redo() {
         execute();
+    }
+
+    @Override
+    public boolean isCollapsible(Command command) {
+        return command.getClass() == WithDrawCommand.class;
+    }
+
+    @Override
+    public void collapse(Command command) {
+        amount += ((WithDrawCommand)command).amount;
     }
     
     

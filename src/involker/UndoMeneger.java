@@ -26,16 +26,6 @@ public class UndoMeneger {
     }
 
     public void execute(Command command) {
-//        try {
-//            command.execute();
-//            if (isUndoAvailable() && undoStack.peek().isCollapsible(command)) {
-//                undoStack.peek().collapse(command);
-//            } else {
-//                undoStack.push(command);
-//            }
-//            redoStack.clear();
-//        } catch (IllegalStateException e) {
-//        }
         command.execute();
         undoStack.push(command);
         redoStack.clear();
